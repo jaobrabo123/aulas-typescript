@@ -1,12 +1,6 @@
 // * primitives
+function soma(num1: number, num2: number) {
+    return num1 + num2;
+}
 
-const nome: string = 'Joao Pedro';
-const ativo: boolean = true;
-const idade: object = {};
-
-
-let dataNascimento: string | Date | null;
-
-dataNascimento = new Date();
-
-dataNascimento = null;
+const dataNascimento = new Date()

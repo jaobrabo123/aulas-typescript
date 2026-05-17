@@ -1,40 +1,65 @@
 // * generics
-
-function buscarPrimeiro<T>(arr: T[]){
-    return arr[0];
-}
-
-type TipoUsuario = 'comum' | 'empresa' | 'admin';
+type Profissao = "Motorista" | "Médico" | "Programador";
 
 interface Usuario {
     nome: string;
     dataNascimento: Date;
-    tipo: TipoUsuario;
-    descricao?: string;
+    saldo: number | `R$${number}`;
+    profissao?: Profissao;
 }
 
-interface ApiResponse<T, U = never>{
-    status: number;
-    message: string;
+interface Admin extends Usuario {
+    setor: string;
+}
+
+interface RepostaAPI<T = undefined> {
     data: T;
-    codigo?: U;
+    status: number;
+    mesasge: string;
 }
 
-const lucas: Usuario = {
-    nome: 'Lucas',
-    tipo: "comum",
+function ultimoDado<T extends Usuario>(dados: T[]): T {
+    return dados[dados.length - 1];
+}
+
+function enviarResposta<T>(resposta: RepostaAPI<T>) {
+    console.log(resposta);
+}
+
+function retornar<T>(data: object) {
+    return data as T;
+}
+
+const usuarios: Admin[] = [{
+    nome: "Jose",
     dataNascimento: new Date(),
-    descricao: '20',
-};
+    saldo: `R$${2000}`,
+    profissao: "Motorista",
+    setor: "RH"
+}, {
+    nome: "Pedro",
+    dataNascimento: new Date(),
+    saldo: 500,
+    profissao: "Médico",
+    setor: "tecnologia"
+}];
 
-const lista = [lucas, lucas, lucas]
-const primeiro = buscarPrimeiro(lista);
+const numeros = [10, 20, 40];
 
-console.log("Nome do primeiro usuário: "+primeiro.nome)
+// const ultimoNumero = ultimoDado(numeros);
 
-const resposta: ApiResponse<Usuario, number> = {
-    message: 'usuario encontrado',
-    status: 200,
-    data: primeiro,
-    codigo: 20
-}
+const ultimoUsuario = ultimoDado(usuarios);
+
+enviarResposta<Usuario>({
+    data: {
+        nome: "Jose",
+        dataNascimento: new Date(),
+        saldo: `R$${2000}`,
+        profissao: "Motorista"
+    },
+    mesasge: "Succeso",
+    status: 200
+})
+
+const retorno = retornar<Usuario>({});
+

@@ -1,20 +1,21 @@
 // * interfaces (com optional fields) e types (com or)
 
-type TipoUsuario = 'comum' | 'empresa' | 'admin';
+type Profissao = "Motorista" | "Médico" | "Programador";
 
 interface Usuario {
     nome: string;
     dataNascimento: Date;
-    tipo: TipoUsuario;
-    descricao?: string;
+    saldo: number | `R$${number}`;
+    profissao?: Profissao;
 }
 
-const lucas: Usuario = {
-    nome: 'Lucas',
-    tipo: "comum",
+function cadastrarUsuario(usuario?: Usuario | null) {
+    console.log("Novo usuário:", usuario);
+}
+
+cadastrarUsuario({
+    nome: "Jose",
     dataNascimento: new Date(),
-    descricao: '20',
-};
-
-
-
+    saldo: `R$${2000}`,
+    profissao: "Motorista"
+});

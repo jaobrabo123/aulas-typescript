@@ -1,6 +1,7 @@
 // * soma
-function soma(x, y) {
-    return x + y;
+
+function soma(num1, num2) {
+    return num1 + num2;
 }
 
-console.log(soma(10, 'bom dia'))
+console.log(soma(2, "200"))
